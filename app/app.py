@@ -27,6 +27,12 @@ def recomendar():
     #Checks if there is a recomendation as a result
     if output.strip() != "false.":
         lugar_recomendado = re.findall(r"'(.*?)'",output)[0]
+        #Get Site Info
+        prolog = Popen(['swipl', '-s', '/home/raulbreton/proyecto_prolog/sistema_experto_turismo.pl'], stdin=PIPE, stdout=PIPE, stderr=PIPE, text=True)
+        query_info = f"obtener_info_lugar('{lugar_recomendado}')."
+        output_info, error_info = prolog.communicate(input=query_info)
+        #Update output variable
+        lugar_recomendado = output_info
     else:
         lugar_recomendado = "No hay lugares que mostrar en base a tus respuestas."
 
