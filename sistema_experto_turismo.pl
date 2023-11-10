@@ -1,6 +1,13 @@
 %swipl -f sistema_experto_turismo.pl
 %recomienda_lugar(LugarRecomendado).
 
+%Tener para obtener informacion de un lugar
+obtener_info_lugar(NombreLugar) :-
+    lugar(_, NombreLugar, Descripcion, Direccion),
+    write('Nombre del lugar: '), write(NombreLugar), nl,
+    write('Descripción: '), write(Descripcion), nl,
+    write('Dirección: '), write(Direccion), nl.
+
 % Hechos sobre lugares turísticos en Guadalajara
 lugar(guadalajara, 'Guadalajara', 'Una hermosa ciudad en el occidente de México.', 'Guadalajara, Jalisco, México').
 lugar(teatro_degollado, 'Teatro Degollado', 'Un hermoso teatro histórico.', 'Calle Belén 22, Zona Centro, Guadalajara, Jalisco, México').

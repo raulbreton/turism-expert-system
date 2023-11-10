@@ -10,6 +10,7 @@ def index():
 
 @app.route('/recomendar', methods=['POST'])
 def recomendar():
+    #Save user input
     ha_visitado = request.form['ha_visitado']
     duracion = request.form['duracion']
     edad = request.form['edad']
@@ -17,12 +18,13 @@ def recomendar():
     presupuesto = request.form['presupuesto']
     tipo_plan = request.form['tipo_plan']
 
-    # Llama a SWI-Prolog desde Python
+    # Calls SWI-Prolog from Python
     prolog = Popen(['swipl', '-s', '/home/raulbreton/proyecto_prolog/sistema_experto_turismo.pl'], stdin=PIPE, stdout=PIPE, stderr=PIPE, text=True)
     query = f"recomienda_lugar('{ha_visitado}', '{duracion}', '{edad}', '{grupo}', '{presupuesto}', '{tipo_plan}', LugarRecomendado)."
 
     output, error = prolog.communicate(input=query)
 
+    #Checks if there is a recomendation as a result
     if output.strip() != "false.":
         lugar_recomendado = re.findall(r"'(.*?)'",output)[0]
     else:
