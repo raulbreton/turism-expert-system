@@ -22,49 +22,63 @@
             <!-- ha_visitado -->
             <label for="duracion">¿Has visitado Guadalajara anteriormente?</label>
             <select name="duracion" required>
-                <option value="1_a_3_dias">1_a_3_dias</option>
-                <option value="4_a_7_dias">4_a_7_dias</option>
-                <option value="mas_de_8_dias">mas_de_8_dias</option>
+                <option value="1_a_3_dias">1 a 3 dias</option>
+                <option value="4_a_7_dias">4 a 7 dias</option>
+                <option value="mas_de_8_dias">Más de 8 dias</option>
             </select>
             <!-- edad -->
             <label for="edad">¿Para qué edad es el plan que busca?</label>
             <select name="edad" required>
-                <option value="de_1_a_12_anios">de_1_a_12_anios</option>
-                <option value="de_13_a_17_anios">de_13_a_17_anios</option>
-                <option value="de_18_a_40_anios">de_18_a_40_anios</option>
-                <option value="mas_de_40_anios">mas_de_40_anios</option>
+                <option value="de_1_a_12_anios">De 1 a 12 años</option>
+                <option value="de_13_a_17_anios">De 13 a 17 años</option>
+                <option value="de_18_a_40_anios">De 18 a 40 años</option>
+                <option value="mas_de_40_anios">Más de 40 años</option>
             </select>
             <!-- grupo -->
             <label for="grupo">¿Para qué clase de grupo es el plan?</label>
             <select name="grupo" required>
-                <option value="pareja">pareja</option>
-                <option value="familia">familia</option>
-                <option value="amigos">amigos</option>
-                <option value="negocios">negocios</option>
+                <option value="pareja">Pareja</option>
+                <option value="familia">Familia</option>
+                <option value="amigos">Amigos</option>
+                <option value="negocios">Negocios</option>
             </select>
             <!-- presupuesto -->
             <label for="presupuesto">¿De qué presupuesto dispones el plan?</label>
             <select name="presupuesto" required>
-                <option value="gratis">gratis</option>
-                <option value="menos_de_1000_MXN">menos_de_1000_MXN</option>
-                <option value="mas_de_1000_MXN">mas_de_1000_MXN</option>
+                <option value="gratis">Gratis</option>
+                <option value="menos_de_1000_MXN">Menos de 1000 MXN</option>
+                <option value="mas_de_1000_MXN">Mas de 1000 MXN</option>
             </select>
              <!-- tipo_plan -->
             <label for="tipo_plan">¿A qué tipo de plan te gustaría ir?</label>
             <select name="tipo_plan" required>
-                <option value="descanso">descanso</option>
-                <option value="cultural">cultural</option>
-                <option value="extremo">extremo</option>
-                <option value="shopping">shopping</option>
-                <option value="fiesta">fiesta</option>
+                <option value="descanso">Descanso</option>
+                <option value="cultural">Cultural</option>
+                <option value="extremo">Extremo</option>
+                <option value="shopping">Shopping</option>
+                <option value="fiesta">Fiesta</option>
             </select>
 
             <button type="submit">Recomendar</button>
         </form>
 
         {% if lugar_recomendado %}
+        <br>
+        <div class="container02">
+            <ul style="list-style: none; text-align: center; padding: 0;">
             <h2>Lugar Recomendado:</h2>
-            <p>{{ lugar_recomendado }}</p>
+            {% for detalle in lugar_recomendado %}
+                <p>{{ detalle }}</p>
+            {% endfor %}
+            </ul>
+        </div>
+        {% else %}
+        <br>
+        <div class="container02">
+            <ul style="list-style: none; text-align: center; padding: 0;">
+            <h2>Oops! Por el momento no tenemos la respuesta. . .</h2>
+            </ul>
+        </div>
         {% endif %}
     </div>
 </body>

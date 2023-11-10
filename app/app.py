@@ -31,12 +31,15 @@ def recomendar():
         prolog = Popen(['swipl', '-s', '/home/raulbreton/proyecto_prolog/sistema_experto_turismo.pl'], stdin=PIPE, stdout=PIPE, stderr=PIPE, text=True)
         query_info = f"obtener_info_lugar('{lugar_recomendado}')."
         output_info, error_info = prolog.communicate(input=query_info)
-        #Update output variable
-        lugar_recomendado = output_info
+        # Filter out the 'true.' value and join the strings
+        lugar_info = output_info.split('\n')
+        lugar_info = [info for info in lugar_info if info != 'true.']
+        lugar_info = [linea for linea in lugar_info if linea.strip()]
+        #formatted_lugar_info = ' '.join(lugar_info)
+        return render_template('index.html', lugar_recomendado=lugar_info)
     else:
-        lugar_recomendado = "No hay lugares que mostrar en base a tus respuestas."
-
-    return render_template('index.html', lugar_recomendado=lugar_recomendado)
+        lugar_recomendado = ["No hay lugares que mostrar en base a tus respuestas."]
+        return render_template('index.html', lugar_recomendado=None)
 
 if __name__ == '__main__':
     app.run(debug=True)

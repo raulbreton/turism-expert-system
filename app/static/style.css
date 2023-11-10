@@ -48,3 +48,19 @@ h2 {
     position: absolute;
     top: 0;
 }
+
+/* Contenedor de la Respuesta */
+.container02 {
+    border: 5px solid #FFC300; /* Añade un borde de 5px de ancho con el color #FFC300 */
+    padding: 20px; /* Añade relleno para separar el contenido del borde */
+}
+
+ul {
+    list-style: none;
+    text-align: center;
+    padding: 0;
+}
+
+h2, p {
+    text-align: center;
+}
