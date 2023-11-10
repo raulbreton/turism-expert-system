@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from subprocess import Popen, PIPE
+import re
 
 app = Flask(__name__)
 
@@ -22,12 +23,10 @@ def recomendar():
 
     output, error = prolog.communicate(input=query)
 
-    if output != "false.":
-        lugar_recomendado = output
+    if output.strip() != "false.":
+        lugar_recomendado = re.findall(r"'(.*?)'",output)[0]
     else:
-        lugar_recomendado = "No hay lugares."
-
-    #lugar_recomendado = output.strip() if not error else f"Error en la consulta: {output}"
+        lugar_recomendado = "No hay lugares que mostrar en base a tus respuestas."
 
     return render_template('index.html', lugar_recomendado=lugar_recomendado)
 
