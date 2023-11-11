@@ -9,10 +9,9 @@ obtener_info_lugar(NombreLugar) :-
     write('Dirección: '), write(Direccion), nl.
 
 % Hechos sobre lugares turísticos en Guadalajara
-lugar(guadalajara, 'Guadalajara', 'Una hermosa ciudad en el occidente de México.', 'Guadalajara, Jalisco, México').
 lugar(teatro_degollado, 'Teatro Degollado', 'Un hermoso teatro histórico.', 'Calle Belén 22, Zona Centro, Guadalajara, Jalisco, México').
-lugar(zoologico_gdl, 'Zoológico de Guadalajara', 'Un zoológico con una gran variedad de animales.', 'Calle Paseo del Zoológico 600, Huentitán el Alto, Guadalajara, Jalisco, México').
-lugar(tequila_tour, 'Tour del Tequila', 'Recorre las destilerías de tequila.', 'Tequila, Jalisco, México').
+lugar(vulcanos_pizza, 'Vulcanos Pizza', 'Lugar de pizzas estilo chicago', 'Av La Paz 1766, Colonia Americana / Av. Paseo la Toscana 777, Valle Real').
+lugar(casa_tequila, 'Casa de Tequila', 'Casa de Catación de Tequíla', 'Kilometro 32.2, 45350 El Arenal, Jal.').
 % Agrega más lugares aquí con sus respectivos hechos.
 
 % Reglas para recomendar lugares
@@ -27,22 +26,23 @@ recomienda_lugar(Sugerencia) :-
 
 % Regla para recomendar un lugar con todos los argumentos directos
 recomienda_lugar(SiHaVisitado, Duracion, Edad, Grupo, Disponibilidad, TipoPlan, LugarRecomendado) :-
-    lugar_recomendado(SiHaVisitado, Duracion, Edad, Grupo, Disponibilidad, TipoPlan, LugarRecomendado).
+lugar_recomendado(SiHaVisitado, Duracion, Edad, Grupo, Disponibilidad, TipoPlan, LugarRecomendado).
 
 % Regla para determinar el lugar recomendado
 lugar_recomendado('si', '1_a_3_dias', 'de_1_a_12_anios', 'pareja', 'menos_de_1000_MXN', 'descanso', 'Teatro Degollado').
-
+lugar_recomendado('si', 'mas_de_8_dias', 'de_18_a_40_anios', 'pareja', 'mas_de_1000_MXN','descanso', 'Vulcanos Pizza').
+lugar_recomendado('no', '4_a_7_dias', 'de_18_a_40_anios', 'amigos', 'mas_de_1000_MXN', 'fiesta','Casa de Tequila').
 % Reglas para evaluar las respuestas del usuario
 ha_visitado_guadalajara(SiHaVisitado) :-
     pregunta('¿Has visitado Guadalajara anteriormente?', ['si', 'no'], SiHaVisitado).
 
 duracion_estadia(Duracion) :-
-    pregunta('¿Cuánto tiempo estarás en la ciudad?', ['1_a_3_dias', '4_a_7_dias', 'mas_de_8_dias'], Duracion).
+    pregunta('¿Cuánto tiempo estarás en la ciudad?', ['1_a_3_dias', '4_a_7_dias', ''], Duracion).
 
 edad_visitante(Edad) :-
     pregunta('¿Para qué edad es el plan que busca?', ['de_1_a_12_anios', 'de_13_a_17_anios', 'de_18_a_40_anios', 'mas_de_40_anios'], Edad).
 
-tipo_grupo(Grupo) :-
+tipo_grupo(Grupo) :-mas_de_8_dias
     pregunta('¿Para qué clase de grupo es el plan?', ['pareja', 'familia', 'amigos', 'negocios'], Grupo).
 
 presupuesto(Disponibilidad) :-
